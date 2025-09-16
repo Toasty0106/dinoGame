@@ -11,7 +11,7 @@
   let gameOver = false;
   let lastFrameTime = null;
   let spawnTimer = 0;
-  let spawnInterval = 1400;
+  let spawnInterval = 1700;
   let obstacles = [];
   let score = 0;
 
@@ -31,14 +31,15 @@
     const height = 44 + Math.round(Math.random() * 36);
     el.style.width = width + 'px';
     el.style.height = height + 'px';
-    const startX = playArea.clientWidth + 40;
+    const extra = 200 + Math.round(Math.random() * 220);
+    const startX = playArea.clientWidth + extra;
     el.style.transform = `translateX(${startX}px)`;
     obstaclesContainer.appendChild(el);
     const speedBase = 240;
     const speed = speedBase + Math.min(700, Math.floor(score / 5) * 8);
-    const obst = { el, x: startX, width, height, speed };
+    const obst = { el, x: startX, width, height, speed, scored: false };
     obstacles.push(obst);
-    spawnInterval = Math.max(650, 1400 - Math.floor(score / 10) * 40);
+    spawnInterval = Math.max(800, 1700 - Math.floor(score / 10) * 40);
   }
 
   function checkCollisionRect(a, b) {
@@ -79,6 +80,10 @@
     for (let i = obstacles.length - 1; i >= 0; i--) {
       const o = obstacles[i];
       o.x -= o.speed * dt;
+      if (!o.scored && o.x + o.width < player.x) {
+        o.scored = true;
+        score += 10;
+      }
       if (o.x + o.width < -60) {
         o.el.remove();
         obstacles.splice(i, 1);
@@ -93,7 +98,7 @@
       if (Math.random() > 0.12) spawnObstacle();
     }
 
-    score += Math.floor(dt * 60);
+    score += Math.floor(dt * 2);
     scoreEl.textContent = `Score: ${score}`;
 
     if (detectCollisions()) return endGame();
@@ -105,7 +110,7 @@
     gameRunning = true;
     lastFrameTime = null;
     spawnTimer = 0;
-    spawnInterval = 1400;
+    spawnInterval = 1700;
     obstacles.forEach(o => o.el.remove());
     obstacles = [];
     score = 0;
@@ -117,7 +122,7 @@
     gameOverPanel.setAttribute('aria-hidden', 'true');
     scoreEl.textContent = `Score: ${score}`;
     playArea.focus();
-    setTimeout(spawnObstacle, 800);
+    setTimeout(spawnObstacle, 1000);
     requestAnimationFrame(gameLoop);
   }
 

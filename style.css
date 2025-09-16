@@ -1,0 +1,34 @@
+:root{
+  --bg-top: #fafafa;
+  --bg-bottom: #e8f9ee;
+  --ground-top: #7a3f16;
+  --ground-base: #3b1f11;
+  --score-bg: rgba(255,255,255,0.95);
+  --accent: #3aa14c;
+  --text-dark: #222;
+  --panel: #fff6d9;
+}
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial; color:var(--text-dark); }
+.game-root { min-height: 100vh; display:flex; flex-direction:column; align-items:stretch; background: linear-gradient(to bottom, var(--bg-top) 0%, #f6f6f6 25%, #f0fff5 45%, var(--bg-bottom) 100%); }
+.hud { display:flex; justify-content:flex-end; padding:18px 28px; }
+.score { font-weight:700; background: var(--score-bg); border-radius:12px; padding:8px 14px; box-shadow: 0 6px 14px rgba(0,0,0,0.08); border: 3px solid rgba(0,0,0,0.03); font-size:16px; }
+.play-area { position: relative; overflow:hidden; height:64vh; min-height:420px; max-height:760px; margin: 0 24px; border-radius: 0; outline:none; }
+.ground { position:absolute; left:0; right:0; height:70px; bottom:0; display:flex; align-items:flex-start; justify-content:center; pointer-events:none; }
+.ground-top { position:absolute; left:0; right:0; top:7px; height:18px; background: linear-gradient(#8b501f, var(--ground-top)); box-shadow: 0 10px 0 var(--ground-base) inset; border-top: 4px solid rgba(0,0,0,0.05); }
+.player { position:absolute; left:60px; bottom:70px; width:64px; height:64px; display:flex; align-items:flex-end; justify-content:center; user-select:none; transition: transform 0.06s linear; z-index: 5; }
+.dino-svg { width:64px; height:64px; }
+.obstacles { position:absolute; left:0; right:0; bottom:0; top:0; pointer-events:none; }
+.obstacle { position:absolute; bottom:70px; width:34px; height:56px; transform: translateX(0); will-change: transform; pointer-events:none; z-index:4; box-shadow: 0 4px 0 rgba(0,0,0,0.08); }
+.obstacle.cactus { background: linear-gradient(#888,#6b6b6b); border-radius:6px; display:flex; align-items:flex-start; justify-content:center; }
+.obstacle.cactus::before { content:""; display:block; width:12px; height:34px; margin-top:6px; background: linear-gradient(#9a9a9a,#7b7b7b); border-radius:6px; transform: translateX(8px); box-shadow: -10px 6px 0 rgba(0,0,0,0.04); }
+.obstacle.cactus::after { content:""; display:block; width:8px; height:8px; background:#777; border-radius:2px; margin-top:4px; transform: translateX(-8px); }
+.game-over { position:absolute; left:50%; top:22%; transform: translateX(-50%); width:320px; border-radius:14px; padding:18px; background: var(--panel); border:4px dashed #e14b4b; box-shadow: 0 12px 30px rgba(0,0,0,0.12); z-index:10; }
+.game-over.hidden { display:none; }
+.game-over-inner { text-align:center; padding:8px 6px; }
+.game-over-title { font-size:34px; font-weight:800; color:#e22b2b; margin-bottom:8px; text-shadow: 0 2px 0 rgba(0,0,0,0.06); }
+.game-over-score { font-size:18px; margin-bottom:14px; color:#222; }
+.btn { background: linear-gradient(#3fad5d,#2f9a50); border:none; padding:10px 18px; color:white; font-weight:700; border-radius:10px; cursor:pointer; box-shadow: 0 8px 18px rgba(0,0,0,0.08); }
+.btn:active { transform: translateY(1px); }
+.footer-credits { padding:10px 22px; text-align:center; color:#666; font-size:13px; }
+@media (max-width:600px){ .player { left:28px; width:52px; height:52px; } .dino-svg { width:52px; height:52px; } .game-over { width:86%; top:18%; } .score { font-size:14px; padding:6px 10px; } }

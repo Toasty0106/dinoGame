@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dino Run — Vanilla JS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-root">
+    <header class="hud">
+      <div class="score" id="score">Score: 0</div>
+    </header>
+
+    <section class="play-area" id="playArea" tabindex="0" aria-label="Dino game area">
+      <div class="ground">
+        <div class="ground-top"></div>
+      </div>
+
+      <div id="player" class="player">
+        <svg viewBox="0 0 80 80" class="dino-svg">
+          <g>
+            <ellipse cx="28" cy="54" rx="14" ry="12" fill="#8BC34A"/>
+            <circle cx="42" cy="42" r="14" fill="#8BC34A"/>
+            <circle cx="40" cy="36" r="3" fill="#000"/>
+            <path d="M46 38 q8 -2 6 -8 q-1 2 -5 2 q-2 3 -1 6" fill="#8BC34A"/>
+            <rect x="18" y="50" rx="2" ry="2" width="4" height="10" fill="#6B8E23"/>
+            <rect x="32" y="50" rx="2" ry="2" width="4" height="10" fill="#6B8E23"/>
+          </g>
+        </svg>
+      </div>
+
+      <div id="obstacles" class="obstacles"></div>
+
+      <div id="gameOverPanel" class="game-over hidden">
+        <div class="game-over-inner">
+          <div class="game-over-title">💥 Game Over!</div>
+          <div class="game-over-score">Final Score: <span id="finalScore">0</span></div>
+          <button id="playAgainBtn" class="btn">Play Again</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-credits">
+      <small>Controls: Space / ↑ = Jump — Click or tap to jump</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
